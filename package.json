@@ -1,6 +1,6 @@
 {
-  "private": true,
-  "name": "dumi-lib",
+  "private": false,
+  "name": "yui",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",

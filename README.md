@@ -1,4 +1,4 @@
-# dumi library
+# Yui library
 
 ## Getting Started
 
