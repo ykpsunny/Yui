@@ -1,0 +1,58 @@
+.yui-tabs-wrapper {
+	.yui-tab-title {
+		position: relative;
+		z-index: 1;
+		&::before {
+			content: "";
+			position: absolute;
+			z-index: -1;
+		}
+
+		.yui-tab-item {
+			padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+			&:hover {
+				color: #61dafb;
+			}
+			&.active {
+				font-weight: 500;
+				color: #61dafb;
+				border-color: #61dafb;
+			}
+		}
+	}
+	&.horizontal {
+		.yui-tab-title {
+			display: flex;
+			&::before {
+				bottom: 0;
+				left: 0;
+				border-bottom: 1px solid #ebedf0;
+				width: 100%;
+				margin-top: -1px;
+			}
+		}
+		.yui-tab-item {
+			border-bottom: 2px solid transparent;
+		}
+	}
+	&.vertical {
+    display: flex;
+    .yui-tab-title{
+      &::before {
+				top: 0;
+				right: 0;
+				border-right: 1px solid #ebedf0;
+				height: 100%;
+				margin-left: -1px;
+			}
+    }
+		.yui-tab-item {
+			border-right: 2px solid transparent;
+		}
+	}
+	.yui-tab-content {
+		padding: 10px;
+	}
+}

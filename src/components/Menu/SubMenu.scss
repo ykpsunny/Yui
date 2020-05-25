@@ -1,0 +1,10 @@
+.yui-sub-menu-wrapper{
+  width: 100%;
+  .yui-sub-menu-title{
+    height: 30px;
+    line-height: 30px;
+		&:hover {
+			color: #61dafb;
+		}
+  }
+}

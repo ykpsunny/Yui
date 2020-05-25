@@ -1,6 +1,6 @@
 {
   "private": false,
-  "name": "yui",
+  "name": "dumi-lib",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -24,6 +24,8 @@
     ]
   },
   "dependencies": {
+    "@types/classnames": "^2.2.10",
+    "classnames": "^2.2.6",
     "react": "^16.12.0"
   },
   "devDependencies": {

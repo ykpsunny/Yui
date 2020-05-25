@@ -1,0 +1,18 @@
+.yui-dropdown-wrapper{
+  .yui-dropdown-box{
+    cursor: pointer;
+    line-height: 26px;
+    &.disibled{
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+  .yui-dropdown-content{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 4px 0;
+    background-color: #fff;
+    position: absolute;
+  }
+}

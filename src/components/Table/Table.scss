@@ -1,0 +1,61 @@
+.yui-table-wrapper {
+	width: 100%;
+	.yui-table-container {
+		border-collapse: collapse;
+		border: 1px solid #e8e8e8;
+		width: 100%;
+		.yui-row {
+			border-bottom: 1px solid #e8e8e8;
+			width: 100%;
+			.yui-column-title {
+				background-color: #fafafa;
+			}
+			.yui-column,
+			.yui-column-title {
+				padding: 10px 20px;
+				text-align: left;
+				.yui-text {
+					display: inline-block;
+					width: 90%;
+				}
+			}
+		}
+		.yui-fixed-title {
+			position: fixed;
+		}
+		tbody {
+			.yui-row {
+				&:hover {
+					background-color: #effaff;
+				}
+			}
+		}
+		&.yui-table-border {
+			.yui-column {
+				border-left: 1px solid #e8e8e8;
+			}
+		}
+		&.yui-table-ellipsis {
+			.yui-column-title,
+			.yui-column {
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+		}
+		.yui-table {
+			&-right {
+				.yui-column,
+				.yui-column-title {
+					text-align: right;
+				}
+			}
+			&-center {
+				.yui-column,
+				.yui-column-title {
+					text-align: center;
+				}
+			}
+		}
+	}
+}

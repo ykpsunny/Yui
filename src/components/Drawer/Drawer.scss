@@ -1,0 +1,56 @@
+.yui-drawer-wrapper {
+	position: absolute;
+	height: 100%;
+	background-color: #fff;
+	box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+	.yui-drawer-title {
+		padding: 10px 20px;
+		color: rgba(0, 0, 0, 0.85);
+		font-weight: 500;
+		line-height: 22px;
+		position: relative;
+		border-bottom: 1px solid #e8e8e8;
+		.yui-title-inner {
+			font-size: 16px;
+		}
+	}
+	.yui-drawer-colse {
+		position: absolute;
+		right: 15px;
+		top: 50%;
+		right: 10px;
+		transform: translate(-50%, -50%);
+		svg {
+			font-size: 18px;
+			cursor: pointer;
+			color: #3f3b3b;
+			&:hover {
+				color: #8d7575;
+			}
+		}
+	}
+	.yui-drawer-content {
+		padding: 10px 20px;
+	}
+}
+.yui-drawer {
+	&-left {
+		left: 0;
+		top: 0;
+	}
+	&-right {
+		right: 0;
+		top: 0;
+	}
+}
+.yui-drawer-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	&-visibility {
+		background-color: rgba(0, 0, 0, 0);
+	}
+}

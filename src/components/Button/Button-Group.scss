@@ -1,0 +1,37 @@
+@import './variable.scss';
+
+.yui-btn-group{
+
+  .yui-btn:not(:first-child) {
+    border-left-color: transparent;
+  }
+
+  .yui-btn{
+    border-radius: 0;
+    &-primary:not(:first-child) {
+      &:hover{
+        border-left-color: $btn-primary-hover-bc;
+      }
+    }
+
+    &-denger:not(:first-child) {
+      &:hover{
+        border-left-color: $btn-denger-hover-bc;
+      }
+    }
+
+     &-default:not(:first-child) {
+       &:hover{
+         border-left-color: $btn-default-hover-bc;
+       }
+    }
+  }
+
+  .yui-btn:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+
+  .yui-btn:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+}

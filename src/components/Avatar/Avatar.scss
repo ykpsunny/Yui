@@ -1,0 +1,31 @@
+.yui-avatar-wrapper {
+	.yui-avatar-icon {
+		box-sizing: content-box;
+		background-color: #ccc;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5px;
+		.name {
+			color: #fff;
+			font-style: normal;
+		}
+	}
+	&.circle {
+    .yui-avatar-icon,.img-box{
+      border-radius: 50%;
+    }
+	}
+	&.square {
+    .yui-avatar-icon,.img-box{
+      border-radius: 2px;
+    }
+	}
+	.img-box {
+    overflow: hidden;
+		img {
+			width: calc(100%);
+			height: calc(100%);
+		}
+	}
+}

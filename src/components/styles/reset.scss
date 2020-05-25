@@ -1,0 +1,44 @@
+html,
+body {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+a {
+  color: #006fff;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: #57a0ff;
+  }
+}
+
+button{
+  outline: none;
+  user-select: none;
+}
+
+[hidden]{
+  display: none;
+}
+
+ul{
+  list-style: none;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}

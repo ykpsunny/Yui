@@ -1,0 +1,79 @@
+.yui-mask-wrapper{
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  @keyframes move{
+    0% {
+      transform: translateY(200px) translate(-50%, -50%);
+    }
+    100% {
+      transform: translateY(0px) translate(-50%, -50%);
+    }
+  }
+  .yui-container{
+    width: 500px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    animation: move 0.3s cubic-bezier(0, 0, 0.05, 0.87) 1 backwards;
+    .yui-modal-header{
+      height: 60px;
+      line-height: 60px;
+      position: relative;
+      border-bottom: 1px solid #ccc;
+      .yui-modal-title{
+       text-align: center;
+       width: 100%; 
+      }
+      .yui-close-wrapper{
+        position: absolute;
+        right: 20px;
+        top: 0;
+        svg{
+          font-size: 24px;
+          cursor: pointer;
+          color: #3f3b3b;
+          &:hover{
+            color: #8d7575;
+          }
+        }
+      }
+    }
+    .yui-modal-header,
+    .yui-modal-footer{
+      padding: 0 20px;
+    }
+    .yui-modal-content{
+      padding: 20px;
+      min-height: 200px;
+    } 
+    .yui-modal-footer{
+      height: 70px;
+      display: flex;
+      border-top: 1px solid #ccc;
+      justify-content: flex-end;
+      align-items: center;
+      .yui-submit{
+        margin-left: 15px;
+      }
+    }
+  }
+}
+.modal-open-body{
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  .yui-mask-hide{
+    background-color: transparent;
+    .yui-container{
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+  }
+}
