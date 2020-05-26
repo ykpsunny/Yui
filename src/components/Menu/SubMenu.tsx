@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import propTypes from 'prop-types';
 
 import './SubMenu.scss';
 
-let padding = 16;
+export interface IProps {
+  title?: React.ReactNode;
+  onTitleClick?: () => void;
+  childrenS?: React.ReactNode;
+  key: string | number;
+  style: CSSProperties;
+  padding: number;
+  childClassName?: string;
+}
 
-function SubMenu(props, context) {
+const SubMenu: React.FC<IProps> = (props, context) => {
   let { openKeys, onOpenChange } = context;
-  function renderContent(children, paddingLeft) {
-    return React.Children.map(children, child => {
+  let { padding } = props;
+  function renderContent(children: React.ReactNode, paddingLeft: number) {
+    return React.Children.map(children, (child: any) => {
       let { style = {} } = child.props,
         { type } = child;
-      if (type.name === 'MenuItem') {
-        return React.cloneElement(child, {
-          style: {
-            paddingLeft,
-            ...style,
-          },
-        });
-      } else if (type.name === 'SubMenu') {
-        return render(child.props, paddingLeft);
-      }
+      if (type.name !== 'MenuItem' || type.name !== 'SubMenu')
+        if (type.name === 'MenuItem') {
+          return React.cloneElement(child, {
+            style: {
+              paddingLeft,
+              ...style,
+            },
+          });
+        } else {
+          return render(child.props, paddingLeft);
+        }
       return child;
     });
   }
 
-  function render(props, paddingLeft = padding) {
+  function render(props: any, paddingLeft = padding) {
     let { title, children, onTitleClick, key, style, ...rest } = props;
     return (
       <li className="yui-sub-menu-wrapper" {...rest}>
@@ -46,7 +56,7 @@ function SubMenu(props, context) {
     );
   }
   return render(props);
-}
+};
 
 SubMenu.contextTypes = {
   openKeys: propTypes.array,
@@ -56,6 +66,7 @@ SubMenu.contextTypes = {
 SubMenu.defaultProps = {
   title: 'Title',
   onTitleClick: () => {},
+  padding: 16,
 };
 
 SubMenu.propTypes = {

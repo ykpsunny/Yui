@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, CSSProperties } from 'react';
 
 import './Modal.scss';
 
@@ -6,15 +6,35 @@ import propTypes from 'prop-types';
 
 import { Button } from '../Button';
 
-import { CloseIcon } from 'PUBLIC/iconfont/icon';
+import { CloseIcon } from '../../assets/iconfont/icon';
 
 import classnames from 'classnames';
 
 import ReactDOM from 'react-dom';
 
+export interface IProps {
+  afterClose?: () => void;
+  bodyStyle?: CSSProperties;
+  cancelText?: string;
+  closable?: boolean;
+  confirmLoading?: boolean;
+  footer?: React.ReactNode;
+  keyboard?: boolean;
+  maskStyle?: CSSProperties;
+  mask?: boolean;
+  okText?: string;
+  title?: string;
+  visible: boolean;
+  wrapClassName?: string;
+  onCancel: (e: any) => void;
+  onOk?: (e: Event) => void;
+  children: React.ReactNode;
+  maskClosable?: boolean;
+}
+
 const modalOpenClass = 'modal-open-body';
 
-const toggleBodyClass = visible => {
+const toggleBodyClass = (visible: boolean) => {
   const body = document.body;
   if (visible) {
     body.classList.add(modalOpenClass);
@@ -23,7 +43,7 @@ const toggleBodyClass = visible => {
   }
 };
 
-function Modal({
+const Modal: React.FC<IProps> = ({
   afterClose,
   bodyStyle,
   cancelText,
@@ -42,7 +62,7 @@ function Modal({
   children,
   maskClosable,
   ...rest
-}) {
+}) => {
   const [modalVisible, setModalVisible] = useState(visible);
   const clas = classnames('yui-mask-wrapper', wrapClassName, {
     'yui-mask-hide': !mask,
@@ -66,17 +86,17 @@ function Modal({
     };
   });
 
-  function close(e) {
+  function close(e: any) {
     setModalVisible(false);
     onCancel && onCancel(e);
   }
 
-  function okClick(e) {
+  function clickHandle(e: any) {
     setModalVisible(false);
     onOk && onOk(e);
   }
 
-  function keyDownHandle(e) {
+  function keyDownHandle(e: KeyboardEvent) {
     if (!keyboard) {
       return;
     }
@@ -96,7 +116,7 @@ function Modal({
             type="primary"
             className="yui-submit"
             loading={confirmLoading}
-            onClick={okClick}
+            onClick={clickHandle}
           >
             {okText}
           </Button>
@@ -105,7 +125,7 @@ function Modal({
     );
   }
 
-  function cancelBubble(e) {
+  function cancelBubble(e: any) {
     e.stopPropagation();
   }
 
@@ -136,7 +156,7 @@ function Modal({
   return modalVisible
     ? ReactDOM.createPortal(<div>{renderModal()}</div>, document.body)
     : null;
-}
+};
 
 Modal.defaultProps = {
   cancelText: 'Cancel',

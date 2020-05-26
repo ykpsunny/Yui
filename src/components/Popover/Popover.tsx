@@ -8,14 +8,22 @@ import classnames from 'classnames';
 
 import ReactDOM from 'react-dom';
 
-function Popover({
+export interface IProps {
+  content?: React.ReactNode;
+  position: 'leftCenter' | 'topCenter' | 'bottomCenter' | 'rightCenter';
+  className?: string;
+  trigger?: 'hover' | 'click' | 'contextMenu';
+  visible: boolean;
+}
+
+const Popover: React.FC<IProps> = ({
   content,
   children,
   className,
   position,
   visible: defaultVisible,
   trigger,
-}) {
+}) => {
   const [visible, setVisible] = useState(defaultVisible);
   const clas = classnames(
     'yui-popover-wrapper',
@@ -25,7 +33,7 @@ function Popover({
   const childrenRef = useRef();
   const contentRef = useRef();
 
-  let triggerHandle = {};
+  let triggerHandle: any = {};
 
   switch (trigger) {
     case 'click':
@@ -72,8 +80,8 @@ function Popover({
     if (!visible) {
       return;
     }
-    let childrenNode = childrenRef.current,
-      contentNode = contentRef.current,
+    let childrenNode: any = childrenRef.current,
+      contentNode: any = contentRef.current,
       childrenNodeOffset = childrenNode.getBoundingClientRect(),
       contentNodeOffset = contentNode.getBoundingClientRect(),
       transformOrigin = {
@@ -113,7 +121,11 @@ function Popover({
 
   function renderContent() {
     return ReactDOM.createPortal(
-      <div className={clas} ref={contentRef} onClick={e => e.stopPropagation()}>
+      <div
+        className={clas}
+        ref={(ref: any) => (contentRef.current = ref)}
+        onClick={e => e.stopPropagation()}
+      >
         <div className={classnames('yui-popover-content', className)}>
           {content}
         </div>
@@ -157,7 +169,7 @@ function Popover({
       </div>
     </Fragment>
   );
-}
+};
 
 Popover.defaultProps = {
   position: 'bottomCenter',
@@ -172,10 +184,10 @@ Popover.propTypes = {
     'topCenter',
     'bottomCenter',
     'rightCenter',
-  ]), // 显示位置
+  ]).isRequired, // 显示位置
   className: propTypes.string, // 内容类名
   trigger: propTypes.oneOf(['hover', 'click', 'contextMenu']), // 触发事件
-  visible: propTypes.bool, // 是否显示气泡
+  visible: propTypes.bool.isRequired, // 是否显示气泡
 };
 
 export default Popover;

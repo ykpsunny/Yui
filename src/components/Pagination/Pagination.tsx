@@ -6,25 +6,37 @@ import classnames from 'classnames';
 
 import './Pagination.scss';
 
+export interface IProps {
+  current: number;
+  pageSize: number;
+  total: number;
+  disibled?: boolean;
+  hideButton?: boolean;
+  onChange: (current: number) => void;
+}
+
 let commonClass = classnames('yui-pagination-item');
 
-function Pagination({
+const Pagination: React.FC<IProps> = ({
   current,
   pageSize,
   total,
   disibled,
   hideButton,
   onChange,
-}) {
+}) => {
   const [stateCurrent, setStateCurrent] = useState(current);
 
-  const pageTotal = useMemo(() => Math.ceil(total / pageSize));
+  const pageTotal = useMemo(() => Math.ceil(total / pageSize), [
+    total,
+    pageSize,
+  ]);
 
   const [prev, setPrev] = useState(stateCurrent === 1);
 
   const [next, setNext] = useState(pageTotal - 1 === stateCurrent);
 
-  function itemClickHandle(current) {
+  function itemClickHandle(current: number) {
     if (disibled) {
       return;
     }
@@ -98,7 +110,7 @@ function Pagination({
     return liList;
   }
   return <ul className="yui-pagination-wrapper">{renderContent()}</ul>;
-}
+};
 
 Pagination.defaultProps = {
   current: 1,
@@ -110,12 +122,12 @@ Pagination.defaultProps = {
 };
 
 Pagination.propTypes = {
-  current: propTypes.number, // 当前页数
-  pageSize: propTypes.number, // 每页条数
+  current: propTypes.number.isRequired, // 当前页数
+  pageSize: propTypes.number.isRequired, // 每页条数
   total: propTypes.number.isRequired, // 数据总数
   disibled: propTypes.bool, // 禁用分页
   hideButton: propTypes.bool, // 是否显示 prev, next 按钮
-  onChange: propTypes.func, //分页发生改变时的回调，返回的参数问当前页
+  onChange: propTypes.func.isRequired, //分页发生改变时的回调，返回的参数问当前页
 };
 
 export default Pagination;
