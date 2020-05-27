@@ -8,7 +8,7 @@ function transfromDeg(deg) {
   return (deg / 180) * Math.PI;
 }
 
-function getPosition(radius, deg) {
+function getPosition(radius: number, deg: number) {
   let x = 0;
   let y = 0;
   if (deg >= 0 && deg <= 90) {
@@ -42,7 +42,7 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
   const numberPercentage = useMemo(() => {
     let { percentage } = arcConfig;
     return Number(percentage.slice(0, percentage.length - 1));
-  });
+  }, [arcConfig.percentage]);
 
   const endDeg = useMemo(() => {
     return ((360 * numberPercentage) / 100 + arcConfig.startDeg) % 360;

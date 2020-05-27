@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.10",
+    "bezier-easing": "^2.1.0",
     "classnames": "^2.2.6",
     "react": "^16.12.0"
   },
