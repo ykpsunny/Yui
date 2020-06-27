@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 
 import BezierEasing from 'bezier-easing';
 
-function transfromDeg(deg) {
+function transfromDeg(deg: number) {
   return (deg / 180) * Math.PI;
 }
 
@@ -31,7 +31,53 @@ function getPosition(radius: number, deg: number) {
   return { x, y };
 }
 
-function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
+export interface IProps {
+  circleConfig: {
+    radius: number;
+    lineWidth: number;
+    lineColor: string;
+  };
+  pointConfig: {
+    radius: number;
+    fillColor: string;
+  };
+  textConfig: {
+    showText: boolean;
+    label: string;
+    color: string;
+    font: string;
+    textAlign: 'center' | 'left' | 'right';
+    verticalAlign: 'middle';
+    format: (percent: number) => string;
+  };
+  arcConfig: {
+    startDeg: number; // 起始角度
+    color:
+      | [
+          {
+            percent: 0;
+            color: '#f93';
+          },
+          {
+            percent: 1;
+            color: '#ff4949';
+          },
+        ]
+      | string;
+    lineWidth: number;
+    percentage: string;
+    animated: boolean;
+    easing: string;
+    duration: number; // 动画的时长
+  };
+}
+
+const Progress: React.FC<IProps> = ({
+  circleConfig,
+  pointConfig,
+  textConfig,
+  arcConfig,
+}) => {
   const myCanvas = useRef();
 
   const canvasRadius = useMemo(() => {
@@ -49,11 +95,13 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
   }, [arcConfig.startDeg, numberPercentage]);
 
   const EasFunc = useMemo(() => {
-    let easingParams = arcConfig.easing.split(',').map(item => +item);
+    let easingParams = arcConfig.easing
+      .split(',')
+      .map((item: React.ReactText) => +item);
     return BezierEasing(...easingParams);
   }, [arcConfig.easing]);
 
-  function init(canvas) {
+  function init(canvas: { getContext: (arg0: string) => any }) {
     let ctx = canvas.getContext('2d');
     if (arcConfig.percentage === '0%') {
       drawArcAnimate(ctx, endDeg, 0, 0);
@@ -67,13 +115,24 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
     }
   }
 
-  function draw(ctx, endDeg, setpStart, stepTotal) {
+  function draw(
+    ctx: any,
+    endDeg: number,
+    setpStart: number,
+    stepTotal: number,
+  ) {
     drawCircle(ctx);
     drawPoint(ctx, endDeg);
     drawText(ctx, setpStart, stepTotal);
   }
 
-  function drawCircle(ctx) {
+  function drawCircle(ctx: {
+    strokeStyle: any;
+    lineWidth: any;
+    beginPath: () => void;
+    arc: (arg0: any, arg1: any, arg2: any, arg3: number, arg4: number) => void;
+    stroke: () => void;
+  }) {
     ctx.strokeStyle = circleConfig.lineColor;
     ctx.lineWidth = circleConfig.lineWidth;
     ctx.beginPath();
@@ -87,7 +146,17 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
     ctx.stroke();
   }
 
-  function drawText(ctx, setpStart, stepTotal) {
+  function drawText(
+    ctx: {
+      font: any;
+      fillStyle: any;
+      textAlign: any;
+      textBaseline: any;
+      fillText: (arg0: any, arg1: any, arg2: any) => void;
+    },
+    setpStart: number,
+    stepTotal: number,
+  ) {
     let {
       showText,
       label,
@@ -114,7 +183,21 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
     ctx.fillText(label, canvasRadius, canvasRadius);
   }
 
-  function drawPoint(ctx, endDeg) {
+  function drawPoint(
+    ctx: {
+      fillStyle: any;
+      beginPath: () => void;
+      arc: (
+        arg0: any,
+        arg1: any,
+        arg2: any,
+        arg3: number,
+        arg4: number,
+      ) => void;
+      fill: () => void;
+    },
+    endDeg: number,
+  ) {
     let { radius, fillColor } = pointConfig;
     let { x, y } = getPosition(circleConfig.radius, endDeg);
     ctx.fillStyle = fillColor;
@@ -123,7 +206,28 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
     ctx.fill();
   }
 
-  function drawArc(ctx, endDeg) {
+  function drawArc(
+    ctx: {
+      createLinearGradient: (
+        arg0: any,
+        arg1: number,
+        arg2: any,
+        arg3: number,
+      ) => any;
+      strokeStyle: any;
+      lineWidth: any;
+      beginPath: () => void;
+      arc: (
+        arg0: any,
+        arg1: any,
+        arg2: any,
+        arg3: number,
+        arg4: number,
+      ) => void;
+      stroke: () => void;
+    },
+    endDeg: number,
+  ) {
     let { color, lineWidth, startDeg } = arcConfig;
     if (Array.isArray(color)) {
       let gradient = ctx.createLinearGradient(
@@ -154,7 +258,19 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
     }
   }, []);
 
-  function drawArcAnimate(ctx, endDeg, setpStart, stepTotal) {
+  function drawArcAnimate(
+    ctx: {
+      clearRect: (
+        arg0: number,
+        arg1: number,
+        arg2: number,
+        arg3: number,
+      ) => void;
+    },
+    endDeg: number,
+    setpStart: number,
+    stepTotal: number,
+  ) {
     requestAnimationFrame(() => {
       ctx.clearRect(0, 0, size, size);
       const nextDeg = getTargetDeg(
@@ -176,7 +292,12 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
   }
 
   // 顺时针方向，根据开始deg，结束deg，以及步进值step，求取目标deg
-  function getTargetDeg(startDeg, endDeg, setpStart, stepTotal) {
+  function getTargetDeg(
+    startDeg: number,
+    endDeg: number,
+    setpStart: number,
+    stepTotal: number,
+  ) {
     if (stepTotal === 0) {
       return startDeg;
     }
@@ -209,7 +330,7 @@ function Progress({ circleConfig, pointConfig, textConfig, arcConfig }) {
       你的浏览器不支持 canvas ! ! !
     </canvas>
   );
-}
+};
 
 Progress.defaultProps = {
   circleConfig: {
@@ -228,7 +349,7 @@ Progress.defaultProps = {
     font: '14px arial',
     textAlign: 'center',
     verticalAlign: 'middle',
-    format: percent => percent * 50 + '人',
+    format: (percent: number) => percent * 50 + '人',
   },
   arcConfig: {
     startDeg: 270, // 起始角度
@@ -251,11 +372,15 @@ Progress.defaultProps = {
   },
 };
 
-Progress.propTypes = {
-  circleConfig: propTypes.object,
-  pointConfig: propTypes.object,
-  textConfig: propTypes.object,
-  arcConfig: propTypes.object,
-};
+// Progress.propTypes = {
+//   circleConfig: propTypes.objectOf({
+//     radius: propTypes.number,
+//     lineWidth: propTypes.number,
+//     lineColor: propTypes.string,
+//   }),
+//   pointConfig: propTypes.object,
+//   textConfig: propTypes.object,
+//   arcConfig: propTypes.object,
+// };
 
 export default Progress;

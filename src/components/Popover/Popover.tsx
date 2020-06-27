@@ -66,7 +66,10 @@ const Popover: React.FC<IProps> = ({
     }, 0.1);
   }
 
-  function contextMenuHandle(e) {
+  function contextMenuHandle(e: {
+    stopPropagation: () => void;
+    preventDefault: () => void;
+  }) {
     e.stopPropagation();
     e.preventDefault();
     show();
@@ -135,7 +138,7 @@ const Popover: React.FC<IProps> = ({
     );
   }
 
-  function clickHandle(e) {
+  function clickHandle(e: { stopPropagation: () => void }) {
     e.stopPropagation();
     show();
   }
@@ -177,17 +180,17 @@ Popover.defaultProps = {
   trigger: 'hover',
 };
 
-Popover.propTypes = {
-  content: propTypes.node, // 显示内容
-  position: propTypes.oneOf([
-    'leftCenter',
-    'topCenter',
-    'bottomCenter',
-    'rightCenter',
-  ]).isRequired, // 显示位置
-  className: propTypes.string, // 内容类名
-  trigger: propTypes.oneOf(['hover', 'click', 'contextMenu']), // 触发事件
-  visible: propTypes.bool.isRequired, // 是否显示气泡
-};
+// Popover.propTypes = {
+//   content: propTypes.node, // 显示内容
+//   position: propTypes.oneOf([
+//     'leftCenter',
+//     'topCenter',
+//     'bottomCenter',
+//     'rightCenter',
+//   ]).isRequired, // 显示位置
+//   className: propTypes.string, // 内容类名
+//   trigger: propTypes.oneOf(['hover', 'click', 'contextMenu']), // 触发事件
+//   visible: propTypes.bool.isRequired, // 是否显示气泡
+// };
 
 export default Popover;

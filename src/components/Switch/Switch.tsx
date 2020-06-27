@@ -6,7 +6,17 @@ import classnames from 'classnames';
 
 import './Switch.scss';
 
-const Switch = ({
+export interface IProps {
+  defaultChecked?: boolean; // 默认是否选中
+  disabled?: boolean; // 是否禁用
+  size: 'small' | 'middle' | 'large'; // switch 大小
+  id: string; // 关联 label id
+  className?: string; // 容器类名
+  children?: React.ReactNode;
+  onChange?: (checked: boolean) => void; // switch 改变时的回调函数
+}
+
+const Switch: React.FC<IProps> = ({
   defaultChecked,
   disabled,
   size,
@@ -21,9 +31,9 @@ const Switch = ({
       checked,
       disabled,
     });
-  function changeHandle(e) {
+  function changeHandle(e: any) {
     setChecked(!checked);
-    onChange && onChange();
+    onChange && onChange(!checked);
   }
   return (
     <div className={classnames('yui-switch-wrapper', className)}>
@@ -61,14 +71,14 @@ Switch.defaultProps = {
   onChange: () => {},
 };
 
-Switch.propTypes = {
-  defaultChecked: PropTypes.bool, // 默认是否选中
-  disabled: PropTypes.bool, // 是否禁用
-  size: PropTypes.oneOf(['small', 'middle', 'large']), // switch 大小
-  id: PropTypes.string, // 关联 label id
-  className: PropTypes.string, // 容器类名
-  children: PropTypes.node,
-  onChange: PropTypes.func, // switch 改变时的回调函数
-};
+// Switch.propTypes = {
+//   defaultChecked: PropTypes.bool, // 默认是否选中
+//   disabled: PropTypes.bool, // 是否禁用
+//   size: PropTypes.oneOf(['small', 'middle', 'large']).isRequired, // switch 大小
+//   id: PropTypes.string.isRequired, // 关联 label id
+//   className: PropTypes.string, // 容器类名
+//   children: PropTypes.node,
+//   onChange: PropTypes.func.isRequired, // switch 改变时的回调函数
+// };
 
 export default Switch;

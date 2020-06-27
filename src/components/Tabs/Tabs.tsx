@@ -8,11 +8,30 @@ import classnames from 'classnames';
 
 import TabItem from './TabItem';
 
-function Tabs({ children, tabPosition, tabList, defaultActiveKey, onChange }) {
+export interface IProps {
+  children?: React.ReactNode;
+  tabPosition: 'horizontal' | 'vertical';
+  defaultActiveKey: string | number;
+  onChange?: (activeKey: string | number) => void;
+  tabList: [
+    {
+      tabKey: string | number;
+      label: React.ReactNode;
+    },
+  ]; // tab 列表
+}
+
+const Tabs: React.FC<IProps> = ({
+  children,
+  tabPosition,
+  tabList,
+  defaultActiveKey,
+  onChange,
+}) => {
   const clas = classnames('yui-tabs-wrapper', tabPosition),
     [activeKey, setActiveKey] = useState(defaultActiveKey);
 
-  function renderTabList(tabList) {
+  function renderTabList(tabList: any[]) {
     return tabList.map(item => (
       <TabItem {...item} activeKey={activeKey} setActiveKey={setActiveKey} />
     ));
@@ -28,24 +47,24 @@ function Tabs({ children, tabPosition, tabList, defaultActiveKey, onChange }) {
       <div className="yui-tab-content">{children}</div>
     </div>
   );
-}
+};
 
 Tabs.defaultProps = {
   tabPosition: 'horizontal',
 };
 
-Tabs.propTypes = {
-  children: propTypes.node, // 渲染的 pane
-  tabPosition: propTypes.oneOf(['horizontal', 'vertical']), // 显示位置
-  defaultActiveKey: propTypes.oneOfType([propTypes.string, propTypes.number]), // 默认选中的 pane
-  onChange: propTypes.func, // 切换面板时的回调函数
-  tabList: propTypes.arrayOf(
-    propTypes.shape({
-      tabKey: propTypes.oneOfType([propTypes.string, propTypes.number])
-        .isRequired, // tab 切换唯一标识
-      label: propTypes.node.isRequired, // tab item
-    }),
-  ), // tab 列表
-};
+// Tabs.propTypes = {
+//   children: propTypes.node, // 渲染的 pane
+//   tabPosition: propTypes.oneOf(['horizontal', 'vertical']).isRequired, // 显示位置
+//   defaultActiveKey: propTypes.oneOfType([propTypes.string, propTypes.number]), // 默认选中的 pane
+//   onChange: propTypes.func, // 切换面板时的回调函数
+//   tabList: propTypes.arrayOf(
+//     propTypes.shape({
+//       tabKey: propTypes.oneOfType([propTypes.string, propTypes.number])
+//         .isRequired, // tab 切换唯一标识
+//       label: propTypes.node.isRequired, // tab item
+//     }),
+//   ), // tab 列表
+// };
 
 export default Tabs;

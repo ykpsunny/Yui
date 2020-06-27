@@ -6,11 +6,26 @@ import propTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-function RadioGroup({ children, name, className, disibled, onChenge, value }) {
+export interface IProps {
+  name: string; // RadioGroup 下所有 input[type="radio"] 的 name 属性
+  disibled?: boolean; // 禁选所有子单选器
+  onChenge: (value: []) => void; // 选项变化时的回调函数
+  value: string; // 用于设置当前选中的值
+  className?: string; // 容器类名
+}
+
+const RadioGroup: React.FC<IProps> = ({
+  children,
+  name,
+  className,
+  disibled,
+  onChenge,
+  value,
+}) => {
   const clas = classnames('yui-radio-group-wrapper', className);
 
   const renderChildren = useMemo(() => {
-    return React.Children.map(children, child => {
+    return React.Children.map(children, (child: any) => {
       let { value: PrivateValue } = child.props;
       return React.cloneElement(child, {
         name,
@@ -21,13 +36,13 @@ function RadioGroup({ children, name, className, disibled, onChenge, value }) {
     });
   }, [children, disibled, value]);
 
-  function checkboxChange(e) {
+  function checkboxChange(e: { target: { value: any } }) {
     let { value } = e.target;
     onChenge(value);
   }
 
   return <div className={clas}>{renderChildren}</div>;
-}
+};
 
 RadioGroup.defaultProps = {
   disibled: false,
@@ -35,10 +50,10 @@ RadioGroup.defaultProps = {
 };
 
 RadioGroup.propTypes = {
-  name: propTypes.string, // RadioGroup 下所有 input[type="radio"] 的 name 属性
+  name: propTypes.string.isRequired, // RadioGroup 下所有 input[type="radio"] 的 name 属性
   disibled: propTypes.bool, // 禁选所有子单选器
-  onChenge: propTypes.func, // 选项变化时的回调函数
-  value: propTypes.string, // 用于设置当前选中的值
+  onChenge: propTypes.func.isRequired, // 选项变化时的回调函数
+  value: propTypes.string.isRequired, // 用于设置当前选中的值
   className: propTypes.string, // 容器类名
 };
 

@@ -6,7 +6,22 @@ import propTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-function Table({
+export interface IProps {
+  titleColumns: [
+    { title: string; key: string; dataIndex: string; className: string },
+  ]; // Table 标题数据
+  dataSources: [
+    { key: string; name: string; age: number; gender: string; address: string },
+  ]; // Table 内容数据
+  rowKey: string; // 表格行 key 的取值
+  bordered: boolean; // 是否显示 td 边框
+  align: 'left' | 'center' | 'right'; // 文字对齐方式
+  fixedTitle: boolean; // 列是否固定，可选
+  ellipsis: boolean; // 文字超出是否隐藏打点展示
+  className?: string;
+}
+
+const Table: React.FC<IProps> = ({
   titleColumns,
   dataSources,
   bordered,
@@ -15,7 +30,7 @@ function Table({
   className,
   fixedTitle,
   ellipsis,
-}) {
+}) => {
   const clas = classnames(
     'yui-table-container',
     `yui-table-${align}`,
@@ -38,7 +53,7 @@ function Table({
     return titleNode;
   }
   function renderRow() {
-    return dataSources.map(item => {
+    return dataSources.map((item: any) => {
       const { className, key } = item;
       const clas = classnames('yui-row', className);
       return (
@@ -66,7 +81,7 @@ function Table({
       </table>
     </div>
   );
-}
+};
 
 Table.defaultProps = {
   rowKey: 'key',
@@ -76,14 +91,14 @@ Table.defaultProps = {
   ellipsis: true,
 };
 
-Table.propTypes = {
-  titleColumns: propTypes.arrayOf(propTypes.object), // Table 标题数据
-  dataSources: propTypes.arrayOf(propTypes.object), // Table 内容数据
-  rowKey: propTypes.string, // 表格行 key 的取值
-  bordered: propTypes.bool, // 是否显示 td 边框
-  align: propTypes.oneOf(['left', 'center', 'right']), // 文字对齐方式
-  fixedTitle: propTypes.bool, // 列是否固定，可选
-  ellipsis: propTypes.bool, // 文字超出是否隐藏打点展示
-};
+// Table.propTypes = {
+//   titleColumns: propTypes.arrayOf(propTypes.object).isRequired, // Table 标题数据
+//   dataSources: propTypes.arrayOf(propTypes.object).isRequired, // Table 内容数据
+//   rowKey: propTypes.string, // 表格行 key 的取值
+//   bordered: propTypes.bool, // 是否显示 td 边框
+//   align: propTypes.oneOf(['left', 'center', 'right']), // 文字对齐方式
+//   fixedTitle: propTypes.bool, // 列是否固定，可选
+//   ellipsis: propTypes.bool, // 文字超出是否隐藏打点展示
+// };
 
 export default Table;
