@@ -1,8 +1,12 @@
+## Tabs
+
+Demo:
+
+```tsx
 import React, { useState } from 'react';
+import { Tabs } from 'dumi-lib';
 
-import Tabs from '.';
-
-function TabsDemo() {
+export default () => {
   const [state, setState] = useState('0');
   const tabList = [
     {
@@ -41,14 +45,10 @@ function TabsDemo() {
   function changeHandle(activeKey) {
     setState(activeKey);
   }
-
   return (
-    <div>
-      <Tabs tabList={tabList} defaultActiveKey={state} onChange={changeHandle}>
-        {renderContent(state)}
-      </Tabs>
-    </div>
+    <Tabs tabList={tabList} defaultActiveKey={state} onChange={changeHandle}>
+      {renderContent(state)}
+    </Tabs>
   );
-}
-
-export default TabsDemo;
+};
+```

@@ -16,14 +16,15 @@ export interface IProps {
   visible: boolean;
 }
 
-const Popover: React.FC<IProps> = ({
-  content,
-  children,
-  className,
-  position,
-  visible: defaultVisible,
-  trigger,
-}) => {
+const Popover: React.FC<IProps> = props => {
+  const {
+    content,
+    children,
+    className,
+    position,
+    visible: defaultVisible,
+    trigger,
+  } = props;
   const [visible, setVisible] = useState(defaultVisible);
   const clas = classnames(
     'yui-popover-wrapper',
@@ -60,8 +61,8 @@ const Popover: React.FC<IProps> = ({
   }
 
   function setTimer() {
-    clearTimeout(Popover.timer);
-    Popover.timer = setTimeout(() => {
+    clearTimeout((Popover as any).timer);
+    (Popover as any).timer = setTimeout(() => {
       hide();
     }, 0.1);
   }
@@ -180,17 +181,17 @@ Popover.defaultProps = {
   trigger: 'hover',
 };
 
-// Popover.propTypes = {
-//   content: propTypes.node, // 显示内容
-//   position: propTypes.oneOf([
-//     'leftCenter',
-//     'topCenter',
-//     'bottomCenter',
-//     'rightCenter',
-//   ]).isRequired, // 显示位置
-//   className: propTypes.string, // 内容类名
-//   trigger: propTypes.oneOf(['hover', 'click', 'contextMenu']), // 触发事件
-//   visible: propTypes.bool.isRequired, // 是否显示气泡
-// };
+Popover.propTypes = {
+  content: propTypes.node, // 显示内容
+  position: propTypes.oneOf([
+    'leftCenter',
+    'topCenter',
+    'bottomCenter',
+    'rightCenter',
+  ]).isRequired, // 显示位置
+  className: propTypes.string, // 内容类名
+  trigger: propTypes.oneOf(['hover', 'click', 'contextMenu']), // 触发事件
+  visible: propTypes.bool.isRequired, // 是否显示气泡
+};
 
 export default Popover;

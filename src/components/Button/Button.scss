@@ -108,10 +108,22 @@
 	&[disabled], &-loading {
 		cursor: not-allowed;
 	}
+	&-loading{
+		display: flex;
+		align-items: center;
+		.inner-text{
+			display: inline-block;
+		}
+	}
 	.btn-loading {
 		margin-right: 5px;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
 		svg {
 			animation: loading 0.8s linear infinite;
+			height: 90%;
+
 		}
 	}
 	@keyframes loading {

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+## Radio
 
-import Radio from '.';
+Demo:
+
+```tsx
+import React, { useState } from 'react';
+import { Radio } from 'dumi-lib';
 
 const RadioGroup = Radio.RadioGroup;
 
-function RadioDemo() {
+export default () => {
   const [value, setValue] = useState('mail');
   const [checked, setChecked] = useState(false);
   return (
-    <div>
+    <>
       <Radio
         onChenge={e => setChecked(e.target.checked)}
         checked={checked}
@@ -16,7 +20,6 @@ function RadioDemo() {
       >
         email
       </Radio>
-      <p>gender</p>
       <RadioGroup
         name="gender"
         value={value}
@@ -31,8 +34,7 @@ function RadioDemo() {
           femail
         </Radio>
       </RadioGroup>
-    </div>
+    </>
   );
-}
-
-export default RadioDemo;
+};
+```

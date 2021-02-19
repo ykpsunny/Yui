@@ -253,9 +253,7 @@ const Progress: React.FC<IProps> = ({
   }
 
   useEffect(() => {
-    if (myCanvas.current) {
-      init(myCanvas.current);
-    }
+    myCanvas.current && init(myCanvas.current);
   }, []);
 
   function drawArcAnimate(

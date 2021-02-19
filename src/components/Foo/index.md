@@ -1,4 +1,3 @@
-
 ## Foo
 
 Demo:
@@ -9,5 +8,3 @@ import { Foo } from 'dumi-lib';
 
 export default () => <Foo title="First Demo" />;
 ```
-
-More skills for writing demo: https://d.umijs.org/guide/demo-principle

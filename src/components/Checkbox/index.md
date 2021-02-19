@@ -1,19 +1,21 @@
+## Checkbox
+
+Demo:
+
+```tsx
 import React, { useState } from 'react';
+import { Checkbox } from 'dumi-lib';
 
-import Checkbox from '.';
+const CheckboxGroup = Checkbox.CheckboxGroup;
 
-import CheckboxGroup from './CheckboxGroup';
-
-function CheckboxDemo() {
+export default () => {
   let [value, setValue] = useState(['小明', 19]);
   return (
     <div>
-      <Checkbox id="name">name</Checkbox>
-      <br />
+      <Checkbox id="name">Normal</Checkbox>
       <Checkbox id="age" disibled={true}>
-        age
+        Disibled
       </Checkbox>
-      <br />
       <CheckboxGroup
         name="a"
         onChenge={checkedValue => {
@@ -33,6 +35,5 @@ function CheckboxDemo() {
       </CheckboxGroup>
     </div>
   );
-}
-
-export default CheckboxDemo;
+};
+```

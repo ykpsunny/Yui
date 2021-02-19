@@ -1,10 +1,12 @@
+## Modal
+
+Demo:
+
+```tsx
 import React, { useState } from 'react';
+import { Modal, Button } from 'dumi-lib';
 
-import Modal from './';
-
-import { Button } from '../Button';
-
-function ModalDemo() {
+export default () => {
   const [show, setShow] = useState(false);
   function onCancel() {
     console.log('cancel');
@@ -28,6 +30,5 @@ function ModalDemo() {
       <Button onClick={showHandle}>alert</Button>
     </div>
   );
-}
-
-export default ModalDemo;
+};
+```

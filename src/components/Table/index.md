@@ -1,6 +1,10 @@
-import React from 'react';
+## Table
 
-import Table from '.';
+Demo:
+
+```tsx
+import React from 'react';
+import { Table } from 'dumi-lib';
 
 const titleColumns = [
   {
@@ -93,8 +97,7 @@ const dataSources = [
   },
 ];
 
-function TableDemo() {
-  return <Table titleColumns={titleColumns} dataSources={dataSources}></Table>;
-}
-
-export default TableDemo;
+export default () => (
+  <Table titleColumns={titleColumns} dataSources={dataSources} />
+);
+```

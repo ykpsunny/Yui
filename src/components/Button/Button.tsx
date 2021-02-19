@@ -65,7 +65,7 @@ const Button: React.FC<IProps> = ({
           <BtnLoading />
         </i>
       )}
-      {children}
+      <div className="inner-text">{children}</div>
     </button>
   );
 };

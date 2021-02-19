@@ -1,14 +1,14 @@
 import React from 'react';
 
-export const BtnLoading = () => {
+export const BtnLoading = ({ width = 28, height = 28 }) => {
   return (
     <svg
-      class="icon"
+      className="icon"
       viewBox="0 0 1024 1024"
       version="1.1"
       p-id="3620"
-      width="48"
-      height="48"
+      width={width}
+      height={height}
     >
       <defs>
         <style type="text/css"></style>

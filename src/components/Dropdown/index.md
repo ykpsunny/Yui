@@ -1,14 +1,17 @@
+## Dropdown
+
+Demo:
+
+```tsx
 import React from 'react';
 
-import { Dropdown } from '.';
+import { DownIcon } from '../../assets/iconfont/icon';
 
-import { DownIcon } from 'PUBLIC/iconfont/icon';
-
-import { Menu } from '../Menu';
+import { Menu, Dropdown } from 'dumi-lib';
 
 const MenuItem = Menu.MenuItem;
 
-function DropdownDemo() {
+export default () => {
   const content = (
     <Menu>
       <MenuItem id="1">
@@ -31,6 +34,5 @@ function DropdownDemo() {
       </Dropdown>
     </div>
   );
-}
-
-export default DropdownDemo;
+};
+```
