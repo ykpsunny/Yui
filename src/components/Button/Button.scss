@@ -1,137 +1,139 @@
-@import "./variable.scss";
+@import './variable.scss';
 
 @mixin buttonBase(
-	$bg: $btn-default-bg,
-	$color: $btn-default-color,
-	$bc: $btn-default-bc
+  $bg: $btn-default-bg,
+  $color: $btn-default-color,
+  $bc: $btn-default-bc
 ) {
-	border: 1px solid $bc;
-	background-color: $bg;
-	color: $color;
+  border: 1px solid $bc;
+  background-color: $bg;
+  color: $color;
 }
 @mixin buttonHover($bg: $btn-default-hover-bg, $bc: $btn-default-hover-bc) {
-	background-color: $bg;
-	border-color: $bc;
+  background-color: $bg;
+  border-color: $bc;
 }
 @mixin buttonActive($bg: $btn-default-bg) {
-	background-color: $bg;
+  background-color: $bg;
 }
 @mixin common {
-	@include buttonBase;
+  @include buttonBase;
 
-	&:hover {
-		@include buttonHover;
-	}
+  &:hover {
+    @include buttonHover;
+  }
 
-	&:active {
-		@include buttonActive;
-	}
+  &:active {
+    @include buttonActive;
+  }
 
-	&[disabled] {
-		@include buttonBase;
-	}
+  &[disabled] {
+    @include buttonBase;
+  }
 }
 .yui-btn {
-	display: inline-block;
-	padding: 0 15px;
-	line-height: 32px;
-	text-align: center;
-	user-select: none;
-	border-radius: 5px;
-	cursor: pointer;
-	&-default {
-		@include common;
-	}
-	&-primary {
-		@include buttonBase(
-			$bg: $btn-primary-bg,
-			$color: $btn-primary-color,
-			$bc: $btn-primary-bg
-		);
-		&:hover {
-			@include buttonHover(
-				$bg: $btn-primary-hover-bg,
-				$bc: $btn-primary-hover-bc
-			);
-		}
-		&:active {
-			@include buttonActive($bg: $btn-primary-bg);
-		}
-		&[disabled] {
-			@include buttonBase(
-				$bg: $btn-primary-bg,
-				$color: $btn-primary-color,
-				$bc: $btn-primary-bg
-			);
-		}
-	}
-	&-danger {
-		@include buttonBase(
-			$bg: $btn-denger-bg,
-			$color: $btn-denger-color,
-			$bc: $btn-denger-bg
-		);
-		&:hover {
-			@include buttonHover(
-				$bg: $btn-denger-hover-bg,
-				$bc: $btn-denger-hover-bc
-			);
-		}
-		&:active {
-			@include buttonActive($bg: $btn-denger-bg);
-		}
-		&[disabled] {
-			@include buttonBase(
-				$bg: $btn-denger-bg,
-				$color: $btn-denger-color,
-				$bc: $btn-denger-bg
-			);
-		}
-	}
-	&-dashed {
-		@include common;
-		border-style: dashed;
-	}
-	&.shape {
-		border-radius: 50%;
-		padding: 0;
-		min-width: 36px;
-	}
-	&-link {
-		color: $btn-primary-color;
-		font-size: 12px;
-		pointer-events: none;
-	}
-	&-block {
-		width: 100%;
-	}
-	&[disabled], &-loading {
-		cursor: not-allowed;
-	}
-	&-loading{
-		display: flex;
-		align-items: center;
-		.inner-text{
-			display: inline-block;
-		}
-	}
-	.btn-loading {
-		margin-right: 5px;
-		display: flex;
-		align-items: center;
-		overflow: hidden;
-		svg {
-			animation: loading 0.8s linear infinite;
-			height: 90%;
-
-		}
-	}
-	@keyframes loading {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
+  display: inline-block;
+  padding: 0 15px;
+  line-height: 32px;
+  text-align: center;
+  user-select: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &-default {
+    @include common;
+  }
+  &-primary {
+    @include buttonBase(
+      $bg: $btn-primary-bg,
+      $color: $btn-primary-color,
+      $bc: $btn-primary-bg
+    );
+    &:hover {
+      @include buttonHover(
+        $bg: $btn-primary-hover-bg,
+        $bc: $btn-primary-hover-bc
+      );
+    }
+    &:active {
+      @include buttonActive($bg: $btn-primary-bg);
+    }
+    &[disabled] {
+      @include buttonBase(
+        $bg: $btn-primary-bg,
+        $color: $btn-primary-color,
+        $bc: $btn-primary-bg
+      );
+    }
+  }
+  &-danger {
+    @include buttonBase(
+      $bg: $btn-denger-bg,
+      $color: $btn-denger-color,
+      $bc: $btn-denger-bg
+    );
+    &:hover {
+      @include buttonHover(
+        $bg: $btn-denger-hover-bg,
+        $bc: $btn-denger-hover-bc
+      );
+    }
+    &:active {
+      @include buttonActive($bg: $btn-denger-bg);
+    }
+    &[disabled] {
+      @include buttonBase(
+        $bg: $btn-denger-bg,
+        $color: $btn-denger-color,
+        $bc: $btn-denger-bg
+      );
+    }
+  }
+  &-dashed {
+    @include common;
+    border-style: dashed;
+  }
+  &.shape {
+    border-radius: 50%;
+    padding: 0;
+    min-width: 36px;
+  }
+  &-link {
+    color: $btn-primary-color;
+    font-size: 12px;
+    &[disibled] {
+      pointer-events: none;
+    }
+  }
+  &-block {
+    width: 100%;
+  }
+  &[disabled],
+  &-loading {
+    cursor: not-allowed;
+  }
+  &-loading {
+    display: flex;
+    align-items: center;
+    .inner-text {
+      display: inline-block;
+    }
+  }
+  .btn-loading {
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    svg {
+      animation: loading 0.8s linear infinite;
+      height: 90%;
+    }
+  }
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }

@@ -1,6 +1,6 @@
 ## Dropdown
 
-Demo:
+##### Click:
 
 ```tsx
 import React from 'react';
@@ -21,18 +21,16 @@ export default () => {
         <a href="">text1</a>
       </MenuItem>
       <MenuItem id="2">
-        <a href="">text1</a>
+        <a href="">text2</a>
       </MenuItem>
     </Menu>
   );
   return (
-    <div>
-      <Dropdown content={content}>
-        <a href="#" style={{ verticalAlign: 'middle' }}>
-          click me <DownIcon />
-        </a>
-      </Dropdown>
-    </div>
+    <Dropdown content={content}>
+      <a href="#" style={{ verticalAlign: 'middle' }}>
+        click me <DownIcon />
+      </a>
+    </Dropdown>
   );
 };
 ```
